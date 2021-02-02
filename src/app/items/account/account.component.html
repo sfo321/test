@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="mat-elevation-z15 topbar">Test app</mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" class="sidenav">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-nav-list role="list">
       <a mat-list-item routerLink="customer" routerLinkActive="active">Customer Details</a>
       <a mat-list-item routerLink="account" routerLinkActive="active">Account Details</a>
@@ -9,6 +9,5 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
-    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
