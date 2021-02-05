@@ -9,6 +9,7 @@ import { AppCommonModule } from '../../common/common.module';
 @NgModule({
   declarations: [DynamicComponent],
   imports: [
+    NgModule,
     CommonModule,
     AppCommonModule,
     DynamicRoutingModule,

@@ -1,35 +1,24 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AccountComponent } from './app.component';
+import {TestBed, async, ComponentFixture} from '@angular/core/testing';
+import {AccountComponent } from './account.component';
 
-describe('AppComponent', () => {
+describe('AccountComponent', () => {
+  let component: AccountComponent;
+  let fixture: ComponentFixture<AccountComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AccountComponent
-      ],
-    }).compileComponents();
+      declarations: [ AccountComponent ]
+    })
+      .compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AccountComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'test-project'`, () => {
-    const fixture = TestBed.createComponent(AccountComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('test-project');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AccountComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AccountComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('test-project app is running!');
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ButtonComponent} from './button.component';
 
-import { ButtonComponent } from './flo-button.component';
-
-describe('FloButtonComponent', () => {
+describe('ButtonComponent', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
 

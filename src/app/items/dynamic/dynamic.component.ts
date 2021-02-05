@@ -1,101 +1,68 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Form, Validators, NgForm } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-dynamic',
   templateUrl: './dynamic.component.html',
-  styleUrls: ['./dynamic.component.css']
+  styleUrls: ['./dynamic.component.css'],
+  providers: [FormBuilder]
 })
 export class DynamicComponent implements OnInit {
 
   btnSize: string;
-  buttonsForm;
-  form;
-  options: string[] = ['123456789', '123987456', '789456123', '456789', '2589632', '753215987'];
-  filteredOptions: Observable<string[]>;
+  buttonsForm: FormGroup;
+  form: FormGroup;
+  options: string[] = ['4511267894564', '25833129632', '94453215987', '71546783564774', '1225999244582', '664429563547', '127728344323', '9760035423444', '1243456789', '12439874567', '7894756123', '99942934623'];
+  filteredOptions: string[];
   formValid: string;
+  urgent: boolean;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
 
+    this.buttonsForm = this.fb.group({size: ['']});
+
     this.form = this.fb.group({
       sent: [''],
-      documentupld: [''],
-      datesend: [''],
+      docId: [''],
+      date: [''],
       comment: [''],
-      passportnumber: [''],
+      passId: [''],
       urgent: [''],
       deadline: ['']
     });
 
-    this.buttonsForm = this.fb.group({
-      size: [''],
-    });
-
     this.buttonsForm.get('size').valueChanges.subscribe(res => {
-      console.log(res);
       this.btnSize = res;
     });
 
-    this.filteredOptions = this.form.get('passportnumber').valueChanges.pipe(
-      startWith(''),
-      map((value: any) => this._filter(value))
-    );
+    this.form.get('passId').valueChanges.subscribe(res => {
+      this.filteredOptions = this.filter(res);
+    });
 
     this.form.get('sent').valueChanges.subscribe(res => {
-      if (res === 'sent') {
-        this.form.get('passportnumber').disable();
-        this.form.get('urgent').disable();
-        this.form.get('deadline').disable();
-      } else {
-        this.form.get('passportnumber').enable();
-        this.form.get('urgent').enable();
-        this.form.get('deadline').enable();
-      }
-
-      if (res === 'not-sent'){
-        this.form.get('documentupld').disable();
-        this.form.get('datesend').disable();
-      } else {
-        this.form.get('documentupld').enable();
-        this.form.get('datesend').enable();
-      }
+      const sent = res === 'sent' ? 'disable' : 'enable';
+      const notSent = res === 'not-sent' ? 'disable' : 'enable';
+      ['passId', 'urgent', 'deadline'].forEach(x => this.form.get(x)[sent]());
+      ['docId', 'date'].forEach(x => this.form.get(x)[notSent]());
     });
 
-    this.form.get('urgent').valueChanges.subscribe(res => {
-      if (res !== 'urgent'){
-        this.form.get('deadline').clearValidators();
-        this.form.get('deadline').updateValueAndValidity();
-      } else {
-        this.form.get('deadline').setValidators(Validators.required);
-        this.form.get('deadline').updateValueAndValidity();
-      }
-    });
-
-
+    this.form.get('urgent').valueChanges.subscribe(res => this.urgent = res === 'urgent');
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  private filter(value: string): string[] {
+    return value ? this.options.filter(o => o.toLowerCase().indexOf(value.toLowerCase()) === 0) : this.options;
   }
 
   updateDocumentField(ev){
-    this.form.get('documentupld').setValue('file added !!!');
+    if (ev.target.files[0]) {
+      this.form.controls.docId.patchValue(ev.target.files[0].name, {emitEvent: false});
+    }
   }
 
   send(){
     this.formValid = this.form.status;
   }
-
-  click(ev){
-    console.log(ev);
-
-  }
-
 }
