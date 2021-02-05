@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="bar"><ng-content select="[slot=top]"></ng-content></div>
+  <div class="main">
+    <div class="left">
+      <ng-content select="[slot=left]"></ng-content>
+    </div>
+    <div class="right">
+      <ng-content select="[slot=right]"></ng-content>
+    </div>
+  </div>
+  <div class="bar">
+    <ng-content select="[slot=bottom]"></ng-content>
+  </div>
+</div>

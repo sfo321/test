@@ -1,0 +1,57 @@
+<app-view-container>
+
+  <ng-container slot="top">
+    <mat-toolbar color="primary" >{{user.firstName}} {{user.lastName}}</mat-toolbar>
+  </ng-container>
+
+
+  <ng-container slot="left">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>TODOs</mat-card-title>
+      </mat-card-header>
+      <mat-selection-list>
+        <mat-list-option #opt *ngFor="let todo of todos" [disabled]="todo.deadline < date || opt.selected" [selected]="todo.done" (click)="todo.done = true;checkAllDone()">
+          <form>
+            <mat-form-field>
+              <mat-label>Task</mat-label>
+              <input matInput value="{{todo.todo}}" [ngStyle]="{'color': todo.deadline < date && !opt.selected ? 'red' : ''}">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Deadline</mat-label>
+              <input matInput value="{{todo.deadline | date}}" [ngStyle]="{'color': todo.deadline < date && !opt.selected ? 'red' : ''}">
+            </mat-form-field>
+          </form>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card>
+    <br>
+    <mat-card *ngIf="allDone">
+      <mat-card-header>
+        <mat-card-title>ALL DONE!!!</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+    <br>
+  </ng-container>
+
+
+  <ng-container slot="right">
+    <mat-grid-list [cols]="3" [rowHeight]="'1:0.5'">
+      <mat-grid-tile *ngFor="let item of images">
+        <div class="item">
+          <img src="{{item.url}}" alt="{{item.name}}">
+          <span>{{item.name}}</span>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-container>
+
+
+  <ng-container slot="bottom">
+    <mat-card class="align-center">
+      Mobile:&nbsp; <mat-icon>call</mat-icon>&nbsp; <a href="tel:{{user.mobile}}">{{user.mobile}}</a> &nbsp; | Email:&nbsp; <mat-icon>email</mat-icon>&nbsp; <a href="mailto:{{user.email}}">{{user.email}}</a>
+    </mat-card>
+    <br>
+  </ng-container>
+</app-view-container>

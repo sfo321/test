@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: 'customer',
     loadChildren: () => import('./items/customer/customer.module').then((m) => m.CustomerModule),
+    data: ['customer']
   },
   {
     path: 'dynamic',

@@ -1,13 +1,78 @@
-<mat-toolbar color="primary" class="mat-elevation-z15 topbar">Test app</mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" opened class="sidenav">
-    <mat-nav-list role="list">
-      <a mat-list-item routerLink="customer" routerLinkActive="active">Customer Details</a>
-      <a mat-list-item routerLink="account" routerLinkActive="active">Account Details</a>
-      <a mat-list-item routerLink="dynamic" routerLinkActive="active">Dynamic Form</a>
-    </mat-nav-list>
-  </mat-sidenav>
+<app-view-container>
 
-  <mat-sidenav-content class="content">
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <ng-container slot="top">
+    <mat-toolbar color="primary">
+      <img src="{{user.image}}" alt="user.lastname" class="image">
+      <h1 >passport #: {{user.passNumber}}</h1>
+    </mat-toolbar>
+  </ng-container>
+
+
+  <ng-container slot="left">
+    <mat-selection-list >
+      <mat-list-option *ngFor="let item of items">
+        <form>
+          <mat-form-field>
+            <mat-label>Currency</mat-label>
+            <input matInput value="{{item.currency}}">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field>
+            <mat-label>Amount</mat-label>
+            <input matInput value="{{item.amount}}" [ngStyle]="{'color': +item.amount < 0 ? 'red' : 'green'}">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput value="{{item.date | date}}">
+          </mat-form-field>
+        </form>
+      </mat-list-option>
+    </mat-selection-list>
+    <br>
+  </ng-container>
+
+
+  <ng-container slot="right">
+    <form>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Settings</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-slide-toggle [checked]="settings.mail">e-mail</mat-slide-toggle>
+          <br>
+          <mat-slide-toggle [checked]="settings.phone">Tel.</mat-slide-toggle>
+          <br>
+          <mat-slide-toggle [checked]="settings.message">Message</mat-slide-toggle>
+        </mat-card-content>
+        <br>
+        <mat-card-actions> <button mat-raised-button color="primary">Save</button></mat-card-actions>
+      </mat-card>
+    </form>
+    <br>
+  </ng-container>
+
+
+  <ng-container slot="bottom">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          Feedback form
+        </mat-card-title>
+      </mat-card-header>
+      <form>
+        <mat-form-field appearance="outline" class="padding0">
+          <mat-label>Email</mat-label>
+          <input matInput value="{{user.email}}">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline">
+          <mat-label>Message</mat-label>
+          <input matInput placeholder="Enter message">
+        </mat-form-field>
+      </form>
+    </mat-card>
+    <br>
+  </ng-container>
+</app-view-container>

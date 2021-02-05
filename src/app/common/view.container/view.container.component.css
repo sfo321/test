@@ -1,0 +1,23 @@
+.container  {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.left {
+  flex: 4;
+}
+
+.right {
+  flex: 5;
+}
+
+.bar{
+  display: flex;
+  align-items: center;
+  margin: 0 -30px 0 -30px;
+}

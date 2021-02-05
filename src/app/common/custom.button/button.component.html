@@ -1,0 +1,6 @@
+<span [class.disabled]="disabled">
+  <button (click)="clicked.emit($event)" [disabled]="disabled"
+    [ngClass]="{'large': btnSize === 'large', 'small': btnSize === 'small', 'medium': btnSize === 'medium'}">
+    <ng-content></ng-content>
+  </button>
+</span>

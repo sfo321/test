@@ -1,0 +1,100 @@
+<app-view-container>
+
+  <ng-container slot="top">
+    <mat-toolbar color="primary">
+      <h1>Documents Form</h1>
+    </mat-toolbar>
+
+    <mat-toolbar color="primary">
+      <form [formGroup]="form" (ngSubmit)="send()">
+        <mat-radio-group formControlName="sent">
+          <mat-radio-button value="sent">Already sent</mat-radio-button>&nbsp;
+          <mat-radio-button value="not-sent">Not sent yet</mat-radio-button>
+        </mat-radio-group>
+      </form>
+    </mat-toolbar>
+
+    <mat-toolbar color="primary">
+      <form [formGroup]="buttonsForm">
+        <mat-radio-group formControlName="size">
+          <mat-radio-button value="small">Small</mat-radio-button>&nbsp;
+          <mat-radio-button value="medium">Medium</mat-radio-button>
+          <mat-radio-button value="large">Large</mat-radio-button>
+        </mat-radio-group>
+      </form>
+    </mat-toolbar>
+
+  </ng-container>
+
+
+  <ng-container slot="left">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Documents Form</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam incidunt error assumenda architecto numquam
+        repudiandae nesciunt, consectetur ab obcaecati, illum voluptatem vitae magni ut fuga odio! Suscipit assumenda
+        sequi
+        nostrum?
+        <br>
+        <br>
+        <form [formGroup]="form" (ngSubmit)="send()">
+          <ng-container *ngIf="form.controls.sent.value === 'sent'">
+            <br>
+            <mat-form-field>
+              <mat-label>file</mat-label>
+              <input matInput formControlName="documentupld" required>
+            </mat-form-field>
+            <input type="file" hidden #fileInput (change)="updateDocumentField($event)">
+            <button mat-raised-button (click)="fileInput.click()" type="button">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <br>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="datesend" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>Comment</mat-label>
+              <input matInput formControlName="comment">
+            </mat-form-field>
+          </ng-container>
+
+
+          <ng-container *ngIf="form.controls.sent.value === 'not-sent'">
+            <br>
+            <mat-form-field class="example-full-width">
+              <mat-label>Passport Number</mat-label>
+              <input type="text" placeholder="Passport #:" aria-label="Number" matInput formControlName="passportnumber" required
+                     [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <br>
+            <mat-radio-group formControlName="urgent">
+              <mat-label>Text </mat-label>
+              <mat-radio-button value="urgent">Urgen</mat-radio-button>&nbsp;
+              <mat-radio-button value="not-urgent">Not Urgent</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="deadlinetwo" formControlName="deadline" required>
+              <mat-datepicker-toggle matSuffix [for]="deadlinetwo"></mat-datepicker-toggle>
+              <mat-datepicker #deadlinetwo></mat-datepicker>
+            </mat-form-field>
+          </ng-container>
+          <br>
+          <app-button *ngIf="form.controls.sent.value" [disabled]="form.status !== 'VALID'" [size]="btnSize">SEND FORM</app-button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</app-view-container>

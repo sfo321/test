@@ -1,11 +1,14 @@
-.topbar{
+.top-bar{
   position: relative;
   z-index: 10;
 }
-.sidenav{
-  width: 300px;
-}
+
 .content{
-  padding: 0 16px 0 16px;
-  height: calc(100vh - 64px);
+  padding: 0 20px 0 20px;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+.nav{
+  width: 350px;
 }

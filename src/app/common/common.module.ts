@@ -16,6 +16,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {ViewContainerComponent} from './view.container/view.container.component';
+import {CommonService} from './common.service';
+import {ButtonComponent} from './custom.button/button.component';
 
 const modules = [
   CommonModule,
@@ -39,10 +42,9 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    ...modules],
-  exports: [
-    ...modules]
+  imports: [...modules],
+  providers: [CommonService],
+  declarations: [ViewContainerComponent, ButtonComponent],
+  exports: [ViewContainerComponent, ButtonComponent,  ...modules],
 })
 export class AppCommonModule {}

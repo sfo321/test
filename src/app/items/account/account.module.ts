@@ -9,9 +9,9 @@ import { AccountRoutingModule } from './account.routing.module';
 @NgModule({
   declarations: [AccountComponent],
   imports: [
+    CommonModule,
     AppCommonModule,
-    AccountRoutingModule,
-    CommonModule
+    AccountRoutingModule
   ]
 })
 export class AccountModule { }

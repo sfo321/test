@@ -1,0 +1,25 @@
+.image {
+  height: 55px;
+  margin-right: 20px;
+  border-radius: 60px;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  text-align: center;
+  height: 100%;
+}
+
+img.item {
+  display: block;
+  clear: both;
+}
+span.item {
+  margin-top: 8px;
+  display: block;
+}
+

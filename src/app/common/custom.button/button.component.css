@@ -1,0 +1,21 @@
+.large {
+  width: 180px;
+  height: 45px;
+  border-radius: 8px;
+}
+
+.medium {
+  width: 130px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.small {
+  width: 100px;
+  height: 25px;
+  border-radius: 3px;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
